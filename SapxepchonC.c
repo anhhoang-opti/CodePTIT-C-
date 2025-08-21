@@ -1,44 +1,25 @@
 #include <stdio.h>
 
-// hàm nhập mảng
-void nhapmang(int a[], int n) {
-    for(int i = 0; i < n; i++) {
-        scanf("%d", &a[i]);
-    }
-}
+int main(void) {
+    int n;
+    int a[105];                 // N ≤ 100 theo đề
 
-// hàm in mảng
-void inmang(int a[], int n) {
-    for(int i = 0; i < n; i++) {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
-}
+    if (scanf("%d", &n) != 1) return 0;
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
 
-// hàm sắp xếp chọn (selection sort)
-void sapxepchon(int a[], int n) {
-    int i, j, min, temp;
-    for(i = 0; i < n-1; i++) {
-        min = i;
-        for(j = i+1; j < n; j++) {
-            if(a[j] < a[min]) min = j;
+    for (int i = 0; i < n - 1; i++) {
+        int min = i;
+        for (int j = i + 1; j < n; j++)
+            if (a[j] < a[min]) min = j;
+
+        int t = a[i]; a[i] = a[min]; a[min] = t;
+
+        printf("Buoc %d: ", i + 1);   // KHÔNG dùng "Bước"
+        for (int k = 0; k < n; k++) {
+            if (k) printf(" ");       // chỉ 1 khoảng trống giữa các số
+            printf("%d", a[k]);
         }
-        // hoán đổi phần tử nhỏ nhất với a[i]
-        temp = a[i];
-        a[i] = a[min];
-        a[min] = temp;
-
-        printf("Bước %d: ", i+1);
-        inmang(a, n);
+        printf("\n");
     }
-}
-
-int main() {
-    int a[1000], n;
-    scanf("%d", &n);
-
-    nhapmang(a, n);
-    sapxepchon(a, n);
-
     return 0;
 }
